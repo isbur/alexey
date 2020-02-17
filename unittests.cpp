@@ -5,6 +5,9 @@
 #include "io.cpp"
 TEST_CASE( "Data are read", "[data]" ) {
 
+    /*
+     * Preparing input file
+     */
     ofstream output_file;
     
     vector <string> contents{
@@ -13,14 +16,20 @@ TEST_CASE( "Data are read", "[data]" ) {
         "1, -3, 2"  // (x-1)*(x-2)
     };
 
+    output_file.open("input.txt");
     for(vector <string> :: iterator it = begin(contents); it != end(contents); it++){
-
+        output_file << *it << "\n";
     }
+    output_file.close();
+    /*
+     * Preparing for test
+     */
+    double t;
+    pair <double, double> boundaries;
+    vector < vector <int> > Polynomials;
+    read_data(t, boundaries, Polynomials); 
 
-/*
-    REQUIRE( Factorial(1) == 1 );
-    REQUIRE( Factorial(2) == 2 );
-    REQUIRE( Factorial(3) == 6 );
-    REQUIRE( Factorial(10) == 3628800 );
-    */
+    REQUIRE(t == 0.01);
+    REQUIRE(boundaries == pair<double, double>{-1, 1});
+    //REQUIRE(t, contents[0]);
 }
