@@ -9,7 +9,7 @@
 #include <vector>
 
 using namespace std;
-typedef vector<double> Poly;
+#include "polynomials_types.cpp"
 
 // does:  prints all members of vector
 // input: c - ASCII char with the name of the vector
