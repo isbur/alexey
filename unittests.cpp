@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include<fstream>
+#include<utility>
 
 #include "io.cpp"
 TEST_CASE( "Data are read", "[data]" ) {
@@ -89,5 +90,64 @@ TEST_CASE("Derivatives are evaluated", "[derivative]"){
     REQUIRE(
         derivative(vector<double>{1, 1, 1, 1, 1, 1, 1}) == 
         vector<double>{6, 5, 4, 3, 2, 1, 0}
+    );
+}
+
+
+/*
+#include "division2.cpp"
+TEST_CASE("Polynomials are divided", "[pd]"){
+    vector<double> numerator{1, -3, 2};
+    vector<double> denominator{0, 1, -1};
+    dividePolynomialByPolynomial(numerator, denominator);
+    REQUIRE(numerator == vector<double>{0, 1, -2});
+    REQUIRE(denominator == vector<double>{0, 0, 0});
+}
+*/
+
+
+#include "division_rosetta.cpp"
+TEST_CASE("Polynomials are divided", "[pd]"){
+    /*
+    vector<double> numerator{1, -3, 2};
+    vector<double> denominator{0, 1, -1};
+    divide_polynom_A_by_polynom_B(numerator, denominator);
+    divide_polynom_A_by_polynom_B(
+        vector<double>{2, -3, 1}, 
+        vector<double>{-1, 1, 0}
+    );
+    divide_polynom_A_by_polynom_B(
+        vector<double>{-42, 0, -12, 1}, 
+        vector<double>{-3, 1, 0, 0}
+    );
+    */
+    divide_polynom_A_by_polynom_B(
+        vector<double>{1, -12, 0, -42}, 
+        vector<double>{1, -3, 0, 0},
+        3,
+        1
+    );
+    divide_polynom_A_by_polynom_B(
+        vector<double>{1, -3, 2}, 
+        vector<double>{1, -1, 0},
+        2,
+        1
+    );
+    divide_polynom_A_by_polynom_B(
+        vector<double>{1, -12, 0, 81}, 
+        vector<double>{1, -3, 0, 0},
+        3,
+        1
+    );
+    REQUIRE(
+        divide_polynom_A_by_polynom_B(
+            vector<double>{2, -9, 21, -26, 12}, 
+            vector<double>{2, -3, 0, 0, 0},
+            4,
+            1
+        ) == pair<vector<double>,vector<double> >{
+            vector<double>{1, -3, 6, -4}, 
+            vector<double>{0, 0, 0, 0}
+        }
     );
 }

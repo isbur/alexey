@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <iterator>
+#include <utility>
 #include <vector>
 
 using namespace std;
@@ -19,39 +20,21 @@ void Print(char name, const Poly &A) {
 	cout << "]\n";
 }
 
-int main() {
-	Poly N, D, d, q, r;        // vectors - N / D == q && N % D == r
-	size_t dN, dD, dd, dq, dr; // degrees of vectors
+pair<Poly, Poly> divide_polynom_A_by_polynom_B(Poly N, Poly D, size_t dN, size_t dD) {
+	Poly d, q, r;        // vectors - N / D == q && N % D == r
+	size_t dd, dq, dr; // degrees of vectors
 	size_t i;                  // loop counter
 
 	// setting the degrees of vectors
-	cout << "Enter the degree of N: ";
-	cin >> dN;
-	cout << "Enter the degree of D: "; 
-	cin >> dD;
 	dq = dN-dD;  
 	dr = dN-dD;
 
 	if( dD < 1 || dN < 1 ) {
 		cerr << "Error: degree of D and N must be positive.\n";
-		return 1;
+		//return 1;
 	}
 
 	// allocation and initialization of vectors
-	N.resize(dN+1);
-	cout << "Enter the coefficients of N:"<<endl;  
-	for ( i = 0; i <= dN; i++ ) {
-		cout << "N[" << i << "]= ";
-		cin >> N[i];
-	}
-
-	D.resize(dN+1);
-	cout << "Enter the coefficients of D:"<<endl;	
-	for ( i = 0; i <= dD; i++ ) {
-		cout << "D[" << i << "]= ";
-		cin >> D[i];
-	}
-
 	d.resize(dN+1);
 	q.resize(dq+1);
 	r.resize(dr+1);
@@ -97,7 +80,10 @@ int main() {
 	cout << "=========================" << endl << endl;
 	cout << "-- Result --" << endl << endl;
 
+    
 	Print( 'q', q );
 	Print( 'r', r );
+
+    return pair<Poly, Poly>{q,r};
 }
 
