@@ -20,7 +20,11 @@ void Print(char name, const Poly &A) {
 	cout << "]\n";
 }
 
-pair<Poly, Poly> divide_polynom_A_by_polynom_B(Poly N, Poly D, size_t dN, size_t dD) {
+
+pair<
+    pair <Poly, int>,
+    pair <Poly, int>
+> divide_polynom_A_by_polynom_B(Poly N, Poly D, size_t dN, size_t dD) {
 	Poly d, q, r;        // vectors - N / D == q && N % D == r
 	size_t dd, dq, dr; // degrees of vectors
 	size_t i;                  // loop counter
@@ -84,6 +88,12 @@ pair<Poly, Poly> divide_polynom_A_by_polynom_B(Poly N, Poly D, size_t dN, size_t
 	Print( 'q', q );
 	Print( 'r', r );
 
-    return pair<Poly, Poly>{q,r};
+    return pair<
+        pair <Poly, int>,
+        pair <Poly, int>
+    >{
+        pair <Poly, int>{q, dq},
+        pair <Poly, int>{r, dr}
+    };
 }
 

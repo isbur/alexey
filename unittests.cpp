@@ -123,12 +123,28 @@ TEST_CASE("Polynomial degrees are determined correctly", "[degree]"){
 TEST_CASE("Sturm chain is constructed", "[Sturm]"){
     
     REQUIRE(
-        construct_Sturm_chain(vector<double>{1, -4, 3}) == 
-        vector< vector<double> >{
+        construct_Sturm_chain(
             vector<double>{1, -4, 3},
-            vector<double>{2, -4, 0},
-            vector<double>{1, 0, 0}
-        }
+            2
+        ) == 
+        vector<
+            pair<
+                vector<double>, int
+            >
+        > {
+            pair<vector<double>, int>{
+                {1, -4, 3},
+                2
+            },
+            pair<vector<double>, int>{
+                {2, -4, 0},
+                1
+            },
+            pair<vector<double>, int>{
+                {1, 0, 0},
+                0
+            },
+        }   
     );
     
     REQUIRE(
@@ -150,9 +166,11 @@ TEST_CASE("Polynomials are divided", "[pd]"){
 */
 
 
+/*
 #include "division_rosetta.cpp"
 TEST_CASE("Polynomials are divided", "[pd]"){
-    /*
+
+    /*=========================================
     vector<double> numerator{1, -3, 2};
     vector<double> denominator{0, 1, -1};
     divide_polynom_A_by_polynom_B(numerator, denominator);
@@ -164,7 +182,7 @@ TEST_CASE("Polynomials are divided", "[pd]"){
         vector<double>{-42, 0, -12, 1}, 
         vector<double>{-3, 1, 0, 0}
     );
-    */
+    /*===========================================
     divide_polynom_A_by_polynom_B(
         vector<double>{1, -12, 0, -42}, 
         vector<double>{1, -3, 0, 0},
@@ -195,3 +213,4 @@ TEST_CASE("Polynomials are divided", "[pd]"){
         }
     );
 }
+*/
