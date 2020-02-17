@@ -9,7 +9,7 @@
 #include <vector>
 
 using namespace std;
-#include "polynomials_types.cpp"
+#include "polynomials.cpp"
 
 // does:  prints all members of vector
 // input: c - ASCII char with the name of the vector
@@ -21,10 +21,12 @@ void Print(char name, const Poly &A) {
 }
 
 
-pair<
-    pair <Poly, int>,
-    pair <Poly, int>
-> divide_polynom_A_by_polynom_B(Poly N, Poly D, size_t dN, size_t dD) {
+Big_Pair divide_polynom_A_by_polynom_B(Poly_plus N_plus, Poly_plus D_plus) {
+    Poly N = N_plus.first;
+    size_t dN = N_plus.second;
+    Poly D = D_plus.first;
+    size_t dD = D_plus.second;
+
 	Poly d, q, r;        // vectors - N / D == q && N % D == r
 	size_t dd, dq, dr; // degrees of vectors
 	size_t i;                  // loop counter
@@ -86,14 +88,13 @@ pair<
 
     
 	Print( 'q', q );
+    cout << endl << dq << endl;
 	Print( 'r', r );
+    cout << endl << dr << endl;
 
-    return pair<
-        pair <Poly, int>,
-        pair <Poly, int>
-    >{
-        pair <Poly, int>{q, dq},
-        pair <Poly, int>{r, dr}
+    return Big_Pair{
+        Poly_plus{q, dq},
+        Poly_plus{r, get_degree(r)}
     };
 }
 

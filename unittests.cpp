@@ -104,69 +104,54 @@ TEST_CASE("Unary minus works", "[minus]"){
 }
 
 
-TEST_CASE("Polynomial degrees are determined correctly", "[degree]"){
-    REQUIRE(
-        get_degree(vector<double>{1, 2, 1}) ==
-        2
-    );
-    REQUIRE(
-        get_degree(vector<double>{1, 2, 1, 0, 0, 0, 0}) ==
-        2
-    );
-    REQUIRE(
-        get_degree(vector<double>{1, 0, 0, 0, 0, 0, 0}) ==
-        0
-    );
-}
-
-
 TEST_CASE("Sturm chain is constructed", "[Sturm]"){
     
-    REQUIRE(
-        construct_Sturm_chain(
-            vector<double>{1, -4, 3},
-            2
-        ) == 
-        vector<
-            pair<
-                vector<double>, int
-            >
-        > {
-            pair<vector<double>, int>{
-                {1, -4, 3},
-                2
-            },
-            pair<vector<double>, int>{
-                {2, -4, 0},
-                1
-            },
-            pair<vector<double>, int>{
-                {1, 0, 0},
-                0
-            },
-        }   
+    Poly a{1, -4, 3};
+    Poly b{2, -4, 0};
+    Poly c{0.25, -0, 0};
+    Sturm_chain A = construct_Sturm_chain(
+            Poly_plus{Poly{1, -4, 3}, 2}
     );
-    
+    Sturm_chain B{
+        Poly_plus{Poly{1, -4, 3}, 2},
+        Poly_plus{Poly{2, -4, 0}, 1},
+        Poly_plus{Poly{0.25, -0}, 0}        
+    } ;
+    REQUIRE(A == B);
+    REQUIRE(A.size() == 3);
     REQUIRE(
-        derivative(vector<double>{1, 1, 1, 1, 1, 1, 1}) == 
-        vector<double>{6, 5, 4, 3, 2, 1, 0}
+        get_degree(a) == 2
+    );
+    REQUIRE(
+        get_degree(b) == 1
+    );
+    REQUIRE(
+        get_degree(c) == 0
     );
 }
 
 
-/*
-#include "division2.cpp"
-TEST_CASE("Polynomials are divided", "[pd]"){
-    vector<double> numerator{1, -3, 2};
-    vector<double> denominator{0, 1, -1};
-    dividePolynomialByPolynomial(numerator, denominator);
-    REQUIRE(numerator == vector<double>{0, 1, -2});
-    REQUIRE(denominator == vector<double>{0, 0, 0});
+
+#include "polynomials.cpp"
+TEST_CASE("Polynomial degrees are determined correctly", "[degree]"){
+    REQUIRE(get_degree(
+        Poly{1, 2, 1}
+    ) == 2);
+    REQUIRE(get_degree(
+        Poly{1, 2, 1, 0, 0, 0, 0}
+    ) == 2);
+    REQUIRE(get_degree(
+        Poly{1, 0, 0, 0, 0, 0, 0}
+    ) == 0);
+    REQUIRE(get_degree(
+        Poly{1}
+    ) == 0);
+    REQUIRE(get_degree(
+        Poly{0}
+    ) == 0);
 }
-*/
 
 
-/*
 #include "division_rosetta.cpp"
 TEST_CASE("Polynomials are divided", "[pd]"){
 
@@ -201,16 +186,14 @@ TEST_CASE("Polynomials are divided", "[pd]"){
         3,
         1
     );
+    */
     REQUIRE(
         divide_polynom_A_by_polynom_B(
-            vector<double>{2, -9, 21, -26, 12}, 
-            vector<double>{2, -3, 0, 0, 0},
-            4,
-            1
-        ) == pair<vector<double>,vector<double> >{
-            vector<double>{1, -3, 6, -4}, 
-            vector<double>{0, 0, 0, 0}
+            Poly_plus{Poly{2, -9, 21, -26, 12}, 4},
+            Poly_plus{Poly{2, -3, 0, 0, 0}, 1}
+        ) == Big_Pair{
+            Poly_plus{Poly{1, -3, 6, -4}, 3}, 
+            Poly_plus{Poly{0, 0, 0, 0}, 0}
         }
     );
 }
-*/
