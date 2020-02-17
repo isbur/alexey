@@ -94,6 +94,50 @@ TEST_CASE("Derivatives are evaluated", "[derivative]"){
 }
 
 
+TEST_CASE("Unary minus works", "[minus]"){
+    vector<double> V;
+    V = vector<double>{1, 2, 1};
+    unary_minus(V);
+    REQUIRE(
+        V == vector<double>{-1, -2, -1}
+    );
+}
+
+
+TEST_CASE("Polynomial degrees are determined correctly", "[degree]"){
+    REQUIRE(
+        get_degree(vector<double>{1, 2, 1}) ==
+        2
+    );
+    REQUIRE(
+        get_degree(vector<double>{1, 2, 1, 0, 0, 0, 0}) ==
+        2
+    );
+    REQUIRE(
+        get_degree(vector<double>{1, 0, 0, 0, 0, 0, 0}) ==
+        0
+    );
+}
+
+
+TEST_CASE("Sturm chain is constructed", "[Sturm]"){
+    
+    REQUIRE(
+        construct_Sturm_chain(vector<double>{1, -4, 3}) == 
+        vector< vector<double> >{
+            vector<double>{1, -4, 3},
+            vector<double>{2, -4, 0},
+            vector<double>{1, 0, 0}
+        }
+    );
+    
+    REQUIRE(
+        derivative(vector<double>{1, 1, 1, 1, 1, 1, 1}) == 
+        vector<double>{6, 5, 4, 3, 2, 1, 0}
+    );
+}
+
+
 /*
 #include "division2.cpp"
 TEST_CASE("Polynomials are divided", "[pd]"){

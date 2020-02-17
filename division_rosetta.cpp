@@ -1,7 +1,7 @@
 /*
  * https://rosettacode.org/wiki/Polynomial_long_division#C.2B.2B
  */
-
+#pragma once
 
 #include <iostream>
 #include <iterator>
