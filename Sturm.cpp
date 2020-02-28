@@ -13,26 +13,28 @@ Sturm_chain construct_Sturm_chain(Poly P) {
 
     Sturm_chain.push_back(P);
     Sturm_chain.push_back(
-        derivative(P.first)
+        derivative(P)
     );
 
 
     double i = 1;
     while(
-        Sturm_chain.back().second != 0 &&
-        i < P.first.size() + 3    // for dev purposes to avoid endless while
+        get_degree(Sturm_chain.back()) != 0 &&
+        i < P.size() + 3    // for dev purposes to avoid endless while
     ) {
         remainder = divide_polynom_A_by_polynom_B(
             Sturm_chain.rbegin()[1],
             Sturm_chain.rbegin()[0]
         ).second;
-        unary_minus(remainder.first);
-        Sturm_chain.push_back( remainder );
+        
+        Sturm_chain.push_back( 
+            unary_minus(remainder)
+        );
         i++;
     }
     
-    for(Poly_plus item: Sturm_chain){
-        Print('P', item.first);
+    for(Poly item: Sturm_chain){
+        Print('P', item);
     }
     return Sturm_chain;
 }

@@ -21,11 +21,10 @@ void Print(char name, const Poly &A) {
 }
 
 
-Big_Pair divide_polynom_A_by_polynom_B(Poly_plus N_plus, Poly_plus D_plus) {
-    Poly N = N_plus.first;
-    size_t dN = N_plus.second;
-    Poly D = D_plus.first;
-    size_t dD = D_plus.second;
+Big_Pair divide_polynom_A_by_polynom_B(Poly N, Poly D) {
+
+    size_t dN = N.size() - 1;
+    size_t dD = D.size() - 1;
 
 	Poly d, q, r;        // vectors - N / D == q && N % D == r
 	size_t dd, dq, dr; // degrees of vectors
@@ -92,9 +91,6 @@ Big_Pair divide_polynom_A_by_polynom_B(Poly_plus N_plus, Poly_plus D_plus) {
 	Print( 'r', r );
     cout << endl << dr << endl;
 
-    return Big_Pair{
-        Poly_plus{q, dq},
-        Poly_plus{r, get_degree(r)}
-    };
+    return Big_Pair{q, r};
 }
 
