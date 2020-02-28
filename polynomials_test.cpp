@@ -18,22 +18,34 @@ TEST_CASE("Derivatives are evaluated", "[derivative]"){
 
 
 #include "polynomials.cpp"
-TEST_CASE("Polynomial degrees are determined correctly", "[degree]"){
-    REQUIRE(get_degree(
-        Poly{1, 2, 1}
-    ) == 2);
-    REQUIRE(get_degree(
-        Poly{1, 2, 1, 0, 0, 0, 0}
-    ) == 2);
-    REQUIRE(get_degree(
-        Poly{1, 0, 0, 0, 0, 0, 0}
-    ) == 0);
-    REQUIRE(get_degree(
-        Poly{1}
-    ) == 0);
-    REQUIRE(get_degree(
-        Poly{0}
-    ) == 0);
+
+
+TEST_CASE("Value is substituted to polynomial", "[substitute]"){
+    Poly N;
+
+    N = Poly{1};
+    REQUIRE(
+        substitute(N, 0) == 1
+    );
+    REQUIRE(
+        substitute(N, 10) == 1
+    );
+    REQUIRE(
+        substitute(N, 100) == 1
+    );
+
+    N = Poly{1, 1};
+    REQUIRE(
+        substitute(N, 0) == 1
+    );
+    REQUIRE(
+        substitute(N, 10) == 11
+    );
+
+    N = Poly{1, 0, 1};
+    REQUIRE(
+        substitute(N, 10) == 101
+    );
 }
 
 

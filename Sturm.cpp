@@ -40,17 +40,15 @@ Sturm_chain construct_Sturm_chain(Poly P) {
 }
 
 
-/*
 Sturm_vector construct_Sturm_vector(Sturm_chain Sturm_chain, double x){
     Sturm_vector Sturm_vector;
-    for (Poly_plus item: Sturm_chain){
+    for (Poly item: Sturm_chain){
         Sturm_vector.push_back(
-            substitute(Poly_plus.first, x)
+            substitute(item, x)
         );
     }
     return Sturm_vector;
 }
-*/
 
 
 int count_transpositions(Sturm_vector Sturm_vector) {

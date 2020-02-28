@@ -2,6 +2,8 @@
 
 #include "polynomials_types.cpp"
 
+#include <cmath>
+
 
 Poly derivative(Poly P){
     Poly dP;
@@ -17,6 +19,15 @@ Poly derivative(Poly P){
 
 int get_degree(Poly P){
     return P.size() - 1;
+}
+
+
+double substitute(Poly P, double x){
+    double answer = 0;
+    for(int i = 0; i < P.size(); i++){
+        answer = answer + pow(x, i) * P[P.size()-(i+1)];
+    }
+    return answer;
 }
 
 
