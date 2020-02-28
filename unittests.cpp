@@ -6,11 +6,11 @@
 #include<utility>
 
 
-#include "division_rosetta.cpp"
-#include "io_test.cpp"
-#include "polynomials_test.cpp"
-#include "split_string_test.cpp"
-#include "Sturm_test.cpp"
+#include "division_rosetta_test.cpp"
+//#include "io_test.cpp"
+//#include "polynomials_test.cpp"
+//#include "split_string_test.cpp"
+//#include "Sturm_test.cpp"
 
 
 

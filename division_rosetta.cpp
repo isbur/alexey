@@ -11,20 +11,34 @@
 using namespace std;
 #include "polynomials.cpp"
 
-// does:  prints all members of vector
-// input: c - ASCII char with the name of the vector
-//        A - reference to polynomial (vector)
-void Print(char name, const Poly &A) {
-	cout << name << "(" << A.size()-1 << ") = [ ";
-	copy(A.begin(), A.end(), ostream_iterator<decltype(A[0])>(cout, " "));
-	cout << "]\n";
-}
+
+Big_Pair_Plus rosetta_division(Poly N, size_t dN, Poly D, size_t dD);
+void Print(char name, const Poly &A);
+Poly rosettify(Poly N, Poly D);
+Poly derosettify(Poly N);
 
 
 Big_Pair divide_polynom_A_by_polynom_B(Poly N, Poly D) {
 
     size_t dN = N.size() - 1;
     size_t dD = D.size() - 1;
+
+    Big_Pair_Plus Answer = rosetta_division(
+        N,
+        dN, 
+        rosettify(N, D),
+        dD
+    );
+
+    return Big_Pair{
+        Answer.first.first,
+        derosettify( Answer.second.first )
+    };
+
+}
+
+
+Big_Pair_Plus rosetta_division(Poly N, size_t dN, Poly D, size_t dD){
 
 	Poly d, q, r;        // vectors - N / D == q && N % D == r
 	size_t dd, dq, dr; // degrees of vectors
@@ -91,6 +105,37 @@ Big_Pair divide_polynom_A_by_polynom_B(Poly N, Poly D) {
 	Print( 'r', r );
     cout << endl << dr << endl;
 
-    return Big_Pair{q, r};
+    return Big_Pair_Plus{
+        Poly_plus{q, dq}, 
+        Poly_plus{r, dr}
+    };
 }
 
+
+// does:  prints all members of vector
+// input: c - ASCII char with the name of the vector
+//        A - reference to polynomial (vector)
+void Print(char name, const Poly &A) {
+	cout << name << "(" << A.size()-1 << ") = [ ";
+	copy(A.begin(), A.end(), ostream_iterator<decltype(A[0])>(cout, " "));
+	cout << "]\n";
+}
+
+
+Poly rosettify(Poly N, Poly D) {
+    Poly new_D = D;
+    for (int i = D.size(); i < N.size(); i++){
+        new_D.push_back(0);
+    }
+    return new_D;
+}
+
+
+Poly derosettify(Poly N){
+    int i = N.size() - 1;
+    while(i > 0 && N[i] == 0){
+        N.pop_back();
+        i--;
+    }
+    return N;
+}
