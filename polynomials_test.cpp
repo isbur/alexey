@@ -7,12 +7,12 @@ TEST_CASE("Derivatives are evaluated", "[derivative]"){
     
     REQUIRE(
         derivative(vector<double>{1, -3, 2}) == 
-        vector<double>{2, -3, 0}
+        vector<double>{2, -3}
     );
     
     REQUIRE(
         derivative(vector<double>{1, 1, 1, 1, 1, 1, 1}) == 
-        vector<double>{6, 5, 4, 3, 2, 1, 0}
+        vector<double>{6, 5, 4, 3, 2, 1}
     );
 }
 

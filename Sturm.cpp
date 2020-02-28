@@ -6,23 +6,16 @@
 using namespace std;
 
 
-
-
-
-
-
-
-
-
-Sturm_chain construct_Sturm_chain(Poly_plus P) {
+Sturm_chain construct_Sturm_chain(Poly P) {
     Sturm_chain Sturm_chain;
-    Poly_plus remainder;
+    Poly remainder;
 
 
     Sturm_chain.push_back(P);
     Sturm_chain.push_back(
-        Poly_plus{derivative(P.first), P.second - 1}
+        derivative(P.first)
     );
+
 
     double i = 1;
     while(

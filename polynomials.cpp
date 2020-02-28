@@ -3,28 +3,20 @@
 #include "polynomials_types.cpp"
 
 
-Poly derivative(vector<double> P){
-    vector<double> dP;
-    double new_term;
+Poly derivative(Poly P){
+    Poly dP;
     int i = P.size() - 1;
     for(double term: P) {
         dP.push_back(term * i);
         i--;
     }
+    dP.pop_back();
     return dP;
 }
 
 
 int get_degree(Poly P){
-    int i = P.size() - 1;
-    while(
-        P[i] == 0 && // count last zeros
-        i > 0   // situation of zero vector handling
-    ) {
-        i--;
-    }
-
-    return i;
+    return P.size() - 1;
 }
 
 
