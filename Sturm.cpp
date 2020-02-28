@@ -1,35 +1,17 @@
 #include "Sturm_types.cpp"
 #include "division_rosetta.cpp"
 
-
-vector<double> derivative(vector<double> P){
-    vector<double> dP;
-    double new_term;
-    int i = P.size() - 1;
-    for(double term: P) {
-        dP.push_back(term * i);
-        i--;
-    }
-    return dP;
-}
+#include <utility>
+#include <vector>
+using namespace std;
 
 
-int unary_minus(vector<double> &V){
-    transform(
-        V.begin(),
-        V.end(),
-        V.begin(),
-        [](double &item){return -item;}
-    );
-    return 0;
-}
 
 
-/*
-void divide_polynom_A_by_polynom_B(A, B){
 
-}
-*/
+
+
+
 
 
 Sturm_chain construct_Sturm_chain(Poly_plus P) {
@@ -63,6 +45,7 @@ Sturm_chain construct_Sturm_chain(Poly_plus P) {
 }
 
 
+/*
 Sturm_vector construct_Sturm_vector(Sturm_chain Sturm_chain, double x){
     Sturm_vector Sturm_vector;
     for (Poly_plus item: Sturm_chain){
@@ -72,10 +55,11 @@ Sturm_vector construct_Sturm_vector(Sturm_chain Sturm_chain, double x){
     }
     return Sturm_vector;
 }
+*/
 
 
 int count_transpositions(Sturm_vector Sturm_vector) {
-    int counter 0;
+    int counter = 0;
     for(int i = 1; i < Sturm_vector.size(); i++) {
         if (Sturm_vector[i] * Sturm_vector[i - 1] < 0){
             counter = counter + 1;
@@ -93,6 +77,7 @@ vector<double> find_roots(Sturm_chain Sturm_chain, pair<double, double> boundari
     double t = threshold;
 
     vector <Sturm_vector> Sturm_collection;
+    /*
     while(!all_roots_are_located()){
 
     }
@@ -100,5 +85,6 @@ vector<double> find_roots(Sturm_chain Sturm_chain, pair<double, double> boundari
     while ( (b - a) > t ) {
 
     }
+    */
 
 }
