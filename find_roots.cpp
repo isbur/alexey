@@ -41,18 +41,25 @@ vector<double> find_roots(Sturm_chain Sturm_chain, pair<double, double> boundari
     cout << "Total number of roots on given interval:" << endl << total_number_of_roots_on_given_interval << endl;
     
     
-    while(!all_roots_are_located(Sturm_collection)){
-        int i = 1;
-        while (Sturm_collection[i] - Sturm_collection[i - 1] > -2) {    // not very effective but quick to write
-            Points.insert(
-                Points.begin()+i,
-                (Points[i] + Points[i - 1]) / 2
-            );
-            Sturm_collection.insert(
-                Sturm_collection.begin()+i,
-                get_Sturm_number(Sturm_chain, Points[i])    // new point
-            );
+    int j = 0;
+    while(
+        !all_roots_are_located(Sturm_collection) &&
+        j < 5
+    ) {
+        for (int i = 0; i < Sturm_collection.size(); i++) {
+            if ( Sturm_collection[i] - Sturm_collection[i - 1] < -1 ) {
+                Points.insert(
+                    Points.begin()+i,
+                    (Points[i] + Points[i - 1]) / 2
+                );
+                Sturm_collection.insert(
+                    Sturm_collection.begin()+i,
+                    get_Sturm_number(Sturm_chain, Points[i])    // new point
+                );
+            }
         }
+        
+        j++;
     }
 
 
