@@ -6,6 +6,8 @@
 using namespace std;
 
 
+
+
 Sturm_chain construct_Sturm_chain(Poly P) {
     Sturm_chain Sturm_chain;
     Poly remainder;
@@ -51,14 +53,41 @@ Sturm_vector construct_Sturm_vector(Sturm_chain Sturm_chain, double x){
 }
 
 
+
+
+int result_of_some_investigations(Sturm_vector Sturm_vector, int i);
+
+
 int count_transpositions(Sturm_vector Sturm_vector) {
     int counter = 0;
     for(int i = 1; i < Sturm_vector.size(); i++) {
-        if (Sturm_vector[i] * Sturm_vector[i - 1] < 0){
+        double product = Sturm_vector[i] * Sturm_vector[i - 1];
+        if (product < 0){
             counter = counter + 1;
+        } else {
+            if (product == 0) {
+                counter = counter + result_of_some_investigations(Sturm_vector, i);
+            }
         }
     }
     return counter;
+}
+
+
+int result_of_some_investigations(Sturm_vector Sturm_vector, int i){
+    if (Sturm_vector[i] == 0) {
+        return 0;
+    } else {
+        int j = i - 1;
+        while (Sturm_vector[j] == 0 && j > 0){   // find first non-zero
+            j--;
+        }
+        if (Sturm_vector[i] * Sturm_vector[j] < 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
 
 

@@ -24,7 +24,7 @@ int main() {
         Sturm_chain = construct_Sturm_chain(Poly_plus{item, get_degree(item)});
         Sturm_vector = construct_Sturm_vector()
     }
-    //construct_Sturm_chain(Coefficients);
+
 
     return(0);
 }
