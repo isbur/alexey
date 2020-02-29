@@ -42,6 +42,17 @@ Sturm_chain construct_Sturm_chain(Poly P) {
 }
 
 
+Sturm_vector construct_Sturm_vector(Sturm_chain Sturm_chain, double x);
+int count_sign_changes(Sturm_vector Sturm_vector);
+/*
+ *
+ */
+int get_Sturm_number(Sturm_chain Sturm_chain, double x){
+    Sturm_vector A = construct_Sturm_vector(Sturm_chain, x);
+    return count_sign_changes(A);
+}
+
+
 Sturm_vector construct_Sturm_vector(Sturm_chain Sturm_chain, double x){
     Sturm_vector Sturm_vector;
     for (Poly item: Sturm_chain){
@@ -53,12 +64,11 @@ Sturm_vector construct_Sturm_vector(Sturm_chain Sturm_chain, double x){
 }
 
 
-
-
 int result_of_some_investigations(Sturm_vector Sturm_vector, int i);
-
-
-int count_transpositions(Sturm_vector Sturm_vector) {
+/*
+ *
+ */
+int count_sign_changes(Sturm_vector Sturm_vector) {
     int counter = 0;
     for(int i = 1; i < Sturm_vector.size(); i++) {
         double product = Sturm_vector[i] * Sturm_vector[i - 1];
@@ -88,25 +98,4 @@ int result_of_some_investigations(Sturm_vector Sturm_vector, int i){
             return 0;
         }
     }
-}
-
-
-/*
- * https://www.codespeedy.com/cpp-program-to-implement-bisection-method/
- */
-vector<double> find_roots(Sturm_chain Sturm_chain, pair<double, double> boundaries, double threshold){
-    double a = boundaries.first, b = boundaries.second;
-    double t = threshold;
-
-    vector <Sturm_vector> Sturm_collection;
-    /*
-    while(!all_roots_are_located()){
-
-    }
-
-    while ( (b - a) > t ) {
-
-    }
-    */
-
 }

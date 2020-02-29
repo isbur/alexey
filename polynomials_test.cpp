@@ -46,6 +46,20 @@ TEST_CASE("Value is substituted to polynomial", "[substitute]"){
     REQUIRE(
         substitute(N, 10) == 101
     );
+
+    N = Poly{1, 0};
+    REQUIRE(
+        substitute(N, 1) == 1
+    );
+    REQUIRE(
+        substitute(N, 0) == 0
+    );
+    REQUIRE(
+        substitute(N, -1) == -1
+    );
+    REQUIRE(
+        substitute(N, 10) == 10
+    );
 }
 
 

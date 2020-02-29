@@ -30,29 +30,31 @@ TEST_CASE("Sturm chain is constructed", "[Sturm]"){
 
 
 TEST_CASE(
-        "Sturm vector is determined correctly and number of transpositions is counted properly", 
+        "Sturm vector is determined correctly and number of transpositions are counted properly", 
         "[Sturm]"
 ) {
     Sturm_chain A = construct_Sturm_chain(
             Poly{1, -4, 3}
     );
     Sturm_vector a = construct_Sturm_vector(A, 0);
-    int Sturm_number = count_transpositions(a);
+    int Sturm_number = count_sign_changes(a);
     REQUIRE(Sturm_number == 2);
 
     a = construct_Sturm_vector(A, 1);
-    Sturm_number = count_transpositions(a);
+    Sturm_number = count_sign_changes(a);
     REQUIRE(Sturm_number == 1);
 
     a = construct_Sturm_vector(A, 2);
-    Sturm_number = count_transpositions(a);
+    Sturm_number = count_sign_changes(a);
     REQUIRE(Sturm_number == 1);
 
     a = construct_Sturm_vector(A, 3);
-    Sturm_number = count_transpositions(a);
+    Sturm_number = count_sign_changes(a);
     REQUIRE(Sturm_number == 0);
 
     a = construct_Sturm_vector(A, 4);
-    Sturm_number = count_transpositions(a);
+    Sturm_number = count_sign_changes(a);
     REQUIRE(Sturm_number == 0);
 }
+
+
