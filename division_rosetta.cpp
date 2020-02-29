@@ -58,7 +58,7 @@ Big_Pair_Plus rosetta_division(Poly N, size_t dN, Poly D, size_t dD){
 	q.resize(dq+1);
 	r.resize(dr+1);
 
-	cout << "-- Procedure --" << endl << endl;
+	// cout << "-- Procedure --" << endl << endl;
 	if( dN >= dD ) {
 		while(dN >= dD) {
 			// d equals D shifted right
@@ -68,26 +68,26 @@ Big_Pair_Plus rosetta_division(Poly N, size_t dN, Poly D, size_t dD){
 				d[i+dN-dD] = D[i];
 			dd = dN;
 
-			Print( 'd', d );
+			// Print( 'd', d );
 
 			// calculating one element of q
 			q[dN-dD] = N[dN]/d[dd];
 
-			Print( 'q', q );
+			// Print( 'q', q );
 
 			// d equals d * q[dN-dD]
 			for( i = 0 ; i < dq + 1 ; i++ )
 				d[i] = d[i] * q[dN-dD];
 
-			Print( 'd', d );
+			// Print( 'd', d );
 
 			// N equals N - d
 			for( i = 0 ; i < dN + 1 ; i++ )
 				N[i] = N[i] - d[i];
 			dN--;
 
-			Print( 'N', N );
-			cout << "-----------------------" << endl << endl;
+			// Print( 'N', N );
+			// cout << "-----------------------" << endl << endl;
 
 		}
 	}
@@ -96,14 +96,14 @@ Big_Pair_Plus rosetta_division(Poly N, size_t dN, Poly D, size_t dD){
 	for( i = 0 ; i <= dN ; i++ )
 		r[i] = N[i];
 
-	cout << "=========================" << endl << endl;
-	cout << "-- Result --" << endl << endl;
+	// cout << "=========================" << endl << endl;
+	// cout << "-- Result --" << endl << endl;
 
     
-	Print( 'q', q );
-    cout << endl << dq << endl;
-	Print( 'r', r );
-    cout << endl << dr << endl;
+	// Print( 'q', q );
+    // cout << endl << dq << endl;
+	// Print( 'r', r );
+    // cout << endl << dr << endl;
 
     return Big_Pair_Plus{
         Poly_plus{q, dq}, 

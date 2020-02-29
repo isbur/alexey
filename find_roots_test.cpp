@@ -38,6 +38,24 @@ TEST_CASE(
     REQUIRE(
         find_roots(A, boundaries, threshold) == vector <double>{}
     );
+
+    A = construct_Sturm_chain(
+            Poly{1, 0}
+    );
+    REQUIRE(
+        find_roots(A, boundaries, threshold).size() == 1
+    );
+
+    A = construct_Sturm_chain(
+            Poly{1, -4, 3}
+    );
+    REQUIRE(
+        find_roots(A, boundaries, threshold).size() == 1
+    );
+    boundaries = pair<double, double> {-1, 4};
+    REQUIRE(
+        find_roots(A, boundaries, threshold).size() == 2
+    );
 }
 
 
@@ -50,6 +68,6 @@ TEST_CASE(
     double b = 1;
     double t = 0.001;
     double answer = find_single_root(P, a, b, t);
-    REQUIRE(answer > -t);
-    REQUIRE(answer < t);
+    REQUIRE(answer > -t/2);
+    REQUIRE(answer < t/2);
 }

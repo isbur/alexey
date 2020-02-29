@@ -22,6 +22,29 @@ int get_degree(Poly P){
 }
 
 
+/*
+ * https://stackoverflow.com/a/8581865/10216512
+ */
+template <typename T>
+inline void Print(vector <T> vec){
+
+    std::ostringstream oss;
+
+    if (!vec.empty())
+    {
+        // Convert all but the last element to avoid a trailing ","
+        std::copy(vec.begin(), vec.end()-1,
+            std::ostream_iterator<double>(oss, ","));
+
+        // Now add the last element with no delimiter
+        oss << vec.back();
+    }
+
+    std::cout << "(" << oss.str() << ")" << std::endl;
+    
+}
+
+
 double substitute(Poly P, double x){
     double answer = 0;
     for(int i = 0; i < P.size(); i++){
